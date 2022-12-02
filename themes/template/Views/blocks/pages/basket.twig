@@ -1,0 +1,137 @@
+<div class="row align-items-end justify-content-between head">
+    <div class="col-9 col-md--auto">
+        <div class="row align-items-baseline gy-2 gx-4">
+            <div class="col-auto"><h1 class="page-title">{{ title | raw  }}</h1></div>
+{#            <div class="col-auto cart-number">№ 1660-1906-18860</div>#}
+        </div>
+    </div>
+    <div class="col-3 col-md-auto btn-print">
+        <button type="button" data-print><img src="{{ public_dir() }}img/printer.svg" alt="printer"></button>
+    </div>
+</div>
+{% if notification %}
+<div class="row align-items-center justify-content-between alert" data-alert>
+    <div class="col">
+        <p class="alert-text">{{ notification | raw }}</p>
+    </div>
+    <button class="btn-close" type="button" data-btn="close" onclick="document.querySelector('[data-alert]').style.display = 'none';"></button>
+</div>
+{% endif %}
+<div class="row align-items-start justify-content-between">
+    <div class="col-md-8 products-block">
+        <div class="row select-row">
+            <div class="col-auto">
+                <input class="input-select visually-hidden" type="checkbox" id="select-all" data-input="select-all">
+                <label for="select-all" class="select-all select">Выделить все</label>
+            </div>
+            <div class="col-auto ms-auto ms-md-1">
+                <button class="dell-select" data-selesct="dell">Удалить выбранные</button>
+            </div>
+        </div>
+        <div class="row" data-container="products">
+            {% for item in products %}
+            <div class="col-12 product-cart" data-product data-key="{{ item.key }}">
+                <div class="row align-items-center">
+                    <div class="col-1">
+                        <input class="input-select visually-hidden" type="checkbox" id="select-{{ loop.index }}" data-input="select">
+                        <label for="select-{{ loop.index }}" class="select"></label>
+                    </div>
+                    <div class="col-11">
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col-auto col-md-3 product-img">
+                                <img src="{{ item.image.url }}" alt="{{ item.image.alt }}">
+                            </div>
+                            <div class="col-md-9 product-body">
+{#                                <button class="btn-promocode" type="button">Промокод на скидку 10%</button>#}
+                                <p class="number">код: {{ item.article }}</p>
+                                <p class="product-name">{{ item.title }}</p>
+                                <div class="costing"  data-costing>
+                                    <div class="counter-wrapper"  data-quantity>
+                                        <div class="control" data-action="minus">-</div>
+                                        <div class="counter-current" data-counter>{{ item.quantity }}</div>
+                                        <div class="control" data-action="plus">+</div>
+                                    </div>
+                                    <div class="price">
+                                        {% if item.sale_price %}
+                                        <p class="old-price">{{ item.regular_price }} {{ item.currency }}</p>
+                                        <p class="price-currency"  data-price="{{ item.sale_price }}">{{ item.sale_price }} {{ item.currency }}</p>
+                                        <p class="discount">Скидка {{ item.discount }} {{ item.currency }}</p>
+                                        {% else %}
+                                            <p class="price-currency"  data-price="{{ item.regular_price }}">{{ item.regular_price }} {{ item.currency }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="total-cost"  data-total><span class="value">{{ item.line_total }}</span> {{ item.currency }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="row">
+            <div class="col go-shopping">
+                <a href="{{ shop_link }}">Продолжить покупки</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 order">
+        <h2 class="order-title">Ваш заказ</h2>
+        <div class="row justify-content-between">
+            <div class="col-auto">Выбранно товаров:</div>
+            <div class="col-auto order-value" data-all="quantity"><span class="value _basket_amount">{{ total_quantity }}</span>  шт.</div>
+        </div>
+{#        <div class="row justify-content-between">#}
+{#            <div class="col-auto">Вес заказа:</div>#}
+{#            <div class="col-auto order-value">3,19 кг</div>#}
+{#        </div>#}
+{#        <div class="row justify-content-between">#}
+{#            <div class="col-auto">Общая скидка:</div>#}
+{#            <div class="col-auto order-value">2347 р.</div>#}
+{#        </div>#}
+        <div class="row justify-content-between">
+            <div class="col-auto">Общая стоимость:</div>
+            <div class="col-auto order-cost" data-all="cost"><span class="value _basket_price">{{ total_price }}</span>  р.</div>
+        </div>
+{#        <input class="input-promo" name="promocode" type="text" placeholder="Введите промокод">#}
+        <button class="place-order" data-bs-target="#order-popup" data-bs-toggle="modal" type="button">Оформить заказ</button>
+    </div>
+</div>
+
+<script>
+    document.querySelector('[data-print]').addEventListener('click',()=>
+    {
+        const productsContainer = document.querySelector('[data-container="products"]');
+        const productImg = productsContainer.querySelectorAll('img');
+        productImg.forEach(img => {
+            img.classList.toggle('transparent');
+        });
+        document.querySelector('.shopping').classList.toggle('shopping--print');
+        document.querySelector('body').classList.toggle('monochrome');
+    });
+</script>
+
+<div class="modal fade" id="order-popup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Сделать заказ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form" name="review" method="" action="">
+                    <input  type="text" class="inputName" name="name" placeholder="Ваше имя"  required>
+                    <input type="tel" class="inputPhone" name="phone" placeholder="Номер телефона" required>
+                    <input type="email" class="inputEmail" name="email" placeholder="email">
+                    <textarea class="inputAddress" name="comment" placeholder="Адрес" required></textarea>
+{#                    <textarea class="inputComment" name="dignities" placeholder="Комментарий" required></textarea>#}
+                    <button class="btn-submit order" type="submit">Отправвить</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>

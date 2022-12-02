@@ -1,0 +1,24 @@
+</div>
+<footer class="footer" style="background-image: url({{ image.url }})">
+    <div class="container">
+        <ul class="footer-menu">
+            {% for item in menu %}
+            <li>
+                <a class="footer-link" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+            </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+</footer>
+
+
+
+{% include 'blocks/base/modal.twig' %}
+
+
+
+{{ wp_footer() }}
+</body>
+
+</html>
