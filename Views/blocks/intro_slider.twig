@@ -1,0 +1,18 @@
+<div class="content">
+    <div class="intro_slider_wrapper">
+        <div class="owl-carousel owl-theme">
+            {% for item in items %}
+                {% if item.link %}
+                    <div>
+                        <a href="{{ item.link.url }}" {% if item.link.target %} target="_blank" {% endif %}>
+                            <img src="{{ item.image.url }}" alt="{{ item.image.alt }}">
+                        </a>
+                    </div>
+                {% else %}
+                    <img src="{{ item.image.url }}" alt="{{ item.image.alt }}">
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    </div>
+</div>

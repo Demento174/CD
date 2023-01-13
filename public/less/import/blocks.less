@@ -1,0 +1,256 @@
+.modal{
+  .title{
+    text-align: center;
+    font-family: "Cera Pro", "Arial", sans-serif;
+    text-transform: uppercase;
+    color: #000000;
+  }
+  .response{
+    display: none;
+  }
+}
+
+.header__location{
+  p{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  a{
+    color: #d60420;
+    text-decoration: underline;
+  }
+}
+
+.location_popup {
+  background-color: #fff;
+  -webkit-box-shadow: 0 4px 22.08px 1.92px rgba(0, 0, 0, .1);
+  box-shadow: 0 4px 22.08px 1.92px rgba(0, 0, 0, .1);
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 12px;
+  letter-spacing: .012em;
+  line-height: 1.5;
+  display: none;
+  padding: 45px;
+  .section-title{
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+  }
+}
+
+.location_popup__close {
+  color: #56698f;
+  position: absolute;
+  right: 20%;
+  top: 20%;
+}
+
+.location_popup__close:hover {
+  color: #e41f23
+}
+
+.location_popup__col_title {
+  color: #56698f;
+  font-size: 16px;
+  line-height: 1.125;
+  font-weight: 700;
+  margin-bottom: 12px
+}
+
+.location_popup__list {
+  -webkit-columns: 6;
+  -moz-columns: 6;
+  columns: 6;
+  -webkit-column-gap: 30px;
+  -moz-column-gap: 30px;
+  column-gap: 30px;
+  margin-top: 15px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.location_popup__itm {
+  padding-bottom: 40px;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  break-inside: avoid;
+  ul{
+    list-style: none;
+  }
+}
+
+.location_popup__itm a {
+  border-bottom: 1px solid transparent;
+  font-size: 18px;
+}
+
+.location_popup__itm a:hover {
+  border-color: #e41f23;
+  color: #e41f23;
+  text-decoration: none;
+}
+
+.header{
+  position: relative;
+}
+
+@media (max-width: 720px){
+  .location_popup__list{
+    flex-direction: column;
+  }
+}
+
+
+.intro_slider_wrapper{
+  img{
+    width: 100%;
+    height: auto;
+  }
+}
+
+.owl-carousel{
+  //.owl-item{
+  //  height: 480px;
+  //  img{
+  //    height: 100%;
+  //    width: auto;
+  //  }
+  //}
+  .owl-nav{
+    display: flex;
+    justify-content: space-between;
+
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    button{
+      font-size: 54px !important;
+      color: #d60420 !important;
+      &.disabled{
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.content{
+  margin-bottom: 20px;
+}
+
+.benefits {
+  padding: 0 10%;
+  margin-bottom: 20px;
+  .title{
+    margin-bottom: 15px;
+
+    font-size: 20px;
+    color: #000000;
+    font-weight: bold;
+    font-family: "Cera Pro", "Arial", sans-serif;
+    text-transform: uppercase;
+  }
+  .item{
+    height: 100%;
+    .image{
+      margin-bottom: 10px;
+      img{
+        max-width: 110px;
+        max-height: 55px;      }
+    }
+    .subscribe {
+      font-family: "Cera Pro", "Arial", sans-serif;
+      color: #fc8b14;
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+}
+
+.wp-pagenavi{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.catalog-wripper h1{
+  font-family: "Cera Pro", "Arial", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.form input {
+  padding: 5px;
+  line-height: 2;
+  border: 1px solid #7889A3;
+  border-radius: 5px;
+}
+.form textarea {
+  padding: 5px;
+  border: 1px solid #7889A3;
+  border-radius: 5px;
+}
+.rating-area {
+  overflow: hidden;
+}
+.rating-area:not(:checked) > input {
+  display: none;
+}
+.rating-area:not(:checked) > label {
+  float: right;
+  width: 42px;
+  padding: 0;
+  cursor: pointer;
+  font-size: 32px;
+  line-height: 32px;
+  color: #7889A3;
+}
+.rating-area:not(:checked) > label:before {
+  content: "★";
+}
+.rating-area > input:checked ~ label {
+  color: gold;
+}
+.rating-area:not(:checked) > label:hover,
+.rating-area:not(:checked) > label:hover ~ label {
+  color: gold;
+}
+.rating-area > input:checked + label:hover,
+.rating-area > input:checked + label:hover ~ label,
+.rating-area > input:checked ~ label:hover,
+.rating-area > input:checked ~ label:hover ~ label,
+.rating-area > label:hover ~ input:checked ~ label {
+  color: gold;
+}
+.rate-area > label:active {
+  position: relative;
+}
+.btn-submit {
+  padding: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #FFFFFF;
+  background: #FCBF22;
+  border-radius: 5px;
+}
+.btn-submit:hover {
+  background: #FDB600;
+}
+.btn-submit:active {
+  background: #FECA44;
+}

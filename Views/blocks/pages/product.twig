@@ -1,0 +1,345 @@
+<div class="product-card">
+{#    <div class="row">#}
+{#        <div class="col-12 breadcrumbs">#}
+{#            <a href="">Главная</a>#}
+{#            <span class="arrow"></span>#}
+{#            <a href="">Каталог товаров</a>#}
+{#            <span class="arrow"></span>#}
+{#            <a href="">Электроинструменты</a>#}
+{#            <span class="arrow"></span>#}
+{#            <a href="">Лобзики</a>#}
+{#            <span class="arrow"></span>#}
+{#        </div>#}
+{#    </div>#}
+    <div class="row justify-content-center justify-content-md-between head">
+        <div class="col-auto">
+            <h1 class="title">{{ title }}</h1>
+{#            <div class="breadcrumbs breadcrumbs--sub">#}
+{#                <a href="">METABO</a>#}
+{#                <span class="arrow"></span>#}
+{#                <a href="">Лобзики METABO</a>#}
+{#                <span class="arrow"></span>#}
+{#                <a href="">Маятниковые METABO</a>#}
+{#                <span class="arrow"></span>#}
+{#            </div>#}
+            <div class="product-features">
+                <p class="product-code">Код товара <span>{{ article }}</span></p>
+{#                <div class="rating-result">#}
+{#                    <span class="active"></span>#}
+{#                    <span class="active"></span>#}
+{#                    <span class="active"></span>#}
+{#                    <span class="active"></span>#}
+{#                    <span></span>#}
+{#                </div>#}
+{#                <a class="to-feedback" href="#">Отзывы и вопросы <span>(12)</span>.</a>#}
+            </div>
+        </div>
+{#        <div class="col-auto align-self-end">#}
+{#            <button class="btn-compare" type="button">К сравнению</button>#}
+{#        </div>#}
+    </div>
+    <div class="row justify-content-center align-items-start body">
+        <div class="col-auto col-md-5 product-images">
+            <div class="preview-images">
+                <img class="product-img" src="{{ image.url }}" alt="{{ image.alt }}">
+                {% for image in gallery %}
+                <img class="product-img" src="{{ image.url }}" alt="{{ image.alt }}">
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-auto col-md-3 to-order">
+{#            <h2 class="order-title">Только самовывоз</h2>#}
+            <p class="order-cost">{{ price }} <span>{{ currency }}</span></p>
+            <button class="order-cart add_to_cart add_to_basket" data-id="{{ id }}"  type="button">В корзину</button>
+{#            <p class="order-available">Доступно к заказу: 7</p>#}
+            {% if pickup.switch %}
+            <div class="receiving-block">
+                <p class="receiving-title">{{ pickup.title }}</p>
+                <p class="receiving-text">{{ pickup.content }}</p>
+            </div>
+            {% endif %}
+            {% if courier.switch %}
+            <div class="receiving-block">
+                <p class="receiving-title">{{ courier.title }}</p>
+                <p class="receiving-text">{{ courier.content }}</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-auto col-md-4 characteristic">
+            <h2 class="title">Основные характеристики</h2>
+            <dl class="characteristic-list list-min">
+                {% for attribute in attributes %}
+                    <div class="row characteristic-row justify-content-between row-visible" data-list="row">
+                        <dt class="col-auto">{{ attribute.title }}</dt>
+                        <dd class="col-auto">{{ attribute.value }}</dd>
+                    </div>
+                {% endfor %}
+            </dl>
+            {% if attributes|length > 9  %}
+            <button class="characteristic-all" type="button" data-bt="all"><span>Все характеристики</span><span>Скрыть характеристики</span></button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% if upsell %}
+<div class="related-products">
+    <h1 class="page-title">{{ upsell.title }}</h1>
+    <div class="row">
+        <div class="col">
+            <div data-slider>
+                <div data-slider="visible">
+                    <div data-slider="related">
+                        {% for product in upsell.items %}
+                        <div class="slide-container" data-slider="container">
+                            <article class="tool">
+                                <img src="{{ product.get_image().url }}" alt="{{ product.get_image().alt }}">
+                                <h1 class="title">{{ product.get_title() }}</h1>
+                                {% if product.get_sale_price() %}
+                                <p class="old-cost">{{ product.get_regular_price() }} {{ product.get_currency }}</p>
+                                <p class="current-cost">{{ product.get_sale_price() }} {{ product.get_currency }}</p>
+                                {% else %}
+                                    <p class="current-cost">{{ product.get_price() }} {{ product.get_currency }}</p>
+                                {% endif %}
+                                <a class="see" href="{{ product.get_link() }}">Посмотреть</a>
+                            </article>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <button class="btn-prev" data-slider="btn-prev"></button>
+                <button class="btn-next" data-slider="btn-next"></button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if cross_sail %}
+<div class="similar-products">
+    <h1 class="page-title">{{ cross_sail.title }}</h1>
+    <div class="row">
+        <div class="col">
+            <div data-slider>
+                <div data-slider="visible">
+                    <div data-slider="similar">
+                        {% for product in cross_sail.items %}
+                        <div class="slide-container" data-slider="container">
+                            <article class="equipment">
+                                <div class="head">
+                                    <p class="number">Код {{ product.get_article() }}</p>
+{#                                    <div class="rating-result">#}
+{#                                        <span class="active"></span>#}
+{#                                        <span class="active"></span>#}
+{#                                        <span class="active"></span>#}
+{#                                        <span class="active"></span>#}
+{#                                        <span></span>#}
+{#                                    </div>#}
+                                </div>
+                                <div class="main">
+                                    <h1 class="title">
+                                        <a href="{{ product.get_link() }}">{{ product.get_title() }}</a>
+                                    </h1>
+                                    <div class="img-wrapper">
+                                        <img class="s__img" src="{{ product.get_image().url }}" alt="{{ product.get_image().alt }}">
+                                    </div>
+                                    <p class="text">{{ product.get_short_description() }}</p>
+                                </div>
+                                <div class="foot">
+
+                                    <div>
+                                        {% if product.get_sale_price() %}
+                                        <p class="old-cost">{{ product.get_regular_price() }} {{ product.get_currency }}</p>
+                                        <p class="current-cost">{{ product.get_sale_price() }} {{ product.get_currency }}</p>
+                                        {% else %}
+                                            <p class="current-cost">{{ product.get_price() }} {{ product.get_currency }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+{#                                        <p class="time">Получить завтра</p>#}
+                                        <p class="in-cart add_to_cart add_to_basket" data-id="{{ product.get_id() }}">В корзину</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <button class="btn-prev" data-slider="btn-prev"></button>
+                <button class="btn-next" data-slider="btn-next"></button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<h1 class="visually-hidden">О товаре</h1>
+<div class="container">
+{#    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#        <div class="modal-dialog modal-dialog-centered">#}
+{#            <div class="modal-content">#}
+{#                <div class="modal-header">#}
+{#                    <h5 class="modal-title" id="exampleModalLabel">Напиште отзыв</h5>#}
+{#                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>#}
+{#                </div>#}
+{#                <div class="modal-body">#}
+{#                    <form class="form" name="review" method="" action="">#}
+{#                        <input  type="text" name="name" placeholder="Ваше имя" required>#}
+{#                        <input type="email" name="email" placeholder="email" required>#}
+{#                        <textarea name="comment" placeholder="Комметарий" required></textarea>#}
+{#                        <textarea name="dignities" placeholder="Достоинства" required></textarea>#}
+{#                        <textarea name="disadvantages" placeholder="Недостатки" required></textarea>#}
+{#                        <div class="rating-area">#}
+{#                            <input type="radio" id="star-5" name="rating" value="5" required>#}
+{#                            <label for="star-5" title="Оценка «5»"></label>#}
+{#                            <input type="radio" id="star-4" name="rating" value="4">#}
+{#                            <label for="star-4" title="Оценка «4»"></label>#}
+{#                            <input type="radio" id="star-3" name="rating" value="3">#}
+{#                            <label for="star-3" title="Оценка «3»"></label>#}
+{#                            <input type="radio" id="star-2" name="rating" value="2">#}
+{#                            <label for="star-2" title="Оценка «2»"></label>#}
+{#                            <input type="radio" id="star-1" name="rating" value="1">#}
+{#                            <label for="star-1" title="Оценка «1»"></label>#}
+{#                        </div>#}
+{#                        <button class="btn-submit" type="submit">Отправвить</button>#}
+{#                    </form>#}
+{#                </div>#}
+{#                <div class="modal-footer">#}
+{#                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#        <div class="modal-dialog modal-dialog-centered">#}
+{#            <div class="modal-content">#}
+{#                <div class="modal-header">#}
+{#                    <h5 class="modal-title" id="exampleModalLabel">Напиште вопрос</h5>#}
+{#                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>#}
+{#                </div>#}
+{#                <div class="modal-body">#}
+{#                    <form class="form" name="question" method="" action="">#}
+{#                        <input  type="text" name="name" placeholder="Ваше имя" required>#}
+{#                        <input type="email" name="email" placeholder="email" required>#}
+{#                        <textarea name="question" placeholder="Ваш вопрос" required></textarea>#}
+{#                        <button class="btn-submit" type="submit">Отправвить</button>#}
+{#                    </form>#}
+{#                </div>#}
+{#                <div class="modal-footer">#}
+{#                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+    <div class="row row-toggle">
+        <div class="col-auto">
+            <button class="btn-toggle btn-toggle--active" type="button" data-toggle="specifications">Описание</button>
+        </div>
+{#        <div class="col">#}
+{#            <button class="btn-toggle" type="button" data-toggle="feedback">Отзывы <span>(12)</span>#}
+{#            </button></div>#}
+{#        </div>#}
+    <article data-page="specifications">
+        <h1 class="visually-hidden">Описание</h1>
+        <section class="specifications">
+            <h2 class="title">Технические характеристики</h2>
+            <dl class="specifications-list">
+                {% for item in attributes %}
+                <div class="row no-gutters list-row  justify-content-between row-visible" data-list="row">
+                    <dt class="col-auto">{{ item.title }}</dt>
+                    <dd class="col-auto">{{ item.value }}</dd>
+                </div>
+                {% endfor %}
+
+            </dl>
+            {% if attributes|length > 8 %}
+            <div class="row justify-content-center">
+                <div class="col-auto"><button class="see-all" type="button" data-bt="all"><span>Все характеристики</span><span>Скрыть характеристики</span></button></div>
+            </div>
+            {% endif %}
+        </section>
+        <section class="specifications-text">
+            <h2 class="title">Описание</h2>
+            {{ description | raw }}
+        </section>
+    </article>
+{#    <article class="d-none feedbacks" data-page="feedback">#}
+{#        <h2>Отзывы о METABO STE 100 Quick (601100500)</h2>#}
+{#        <div class="row align-items-center justify-content-around justify-content-md-between head">#}
+{#            <div class="col-auto">#}
+{#                <div class="all-star">#}
+{#                    <div class="rating-result">#}
+{#                        <span class="active"></span>#}
+{#                        <span class="active"></span>#}
+{#                        <span class="active"></span>#}
+{#                        <span class="active"></span>#}
+{#                        <span></span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="all-score">8 оценок (3.88 из 5)</div>#}
+{#            </div>#}
+{#            <div class="col-auto order-1 order-md-0 sorting-block">#}
+{#                <button class="btn-sorting btn-sorting--active" type="button" data-sorting="all">Все</button>#}
+{#                <button class="btn-sorting" type="button" data-sorting="questions">Вопросы</button>#}
+{#                <button class="btn-sorting" type="button" data-sorting="reviews">Отзывы</button>#}
+{#            </div>#}
+{#            <div class="col-auto">#}
+{#                <button type="button" class="write-review" data-bs-toggle="modal" data-bs-target="#reviewModal">#}
+{#                    Написать отзыв#}
+{#                </button>#}
+{#                <button type="button" class="write-question" data-bs-toggle="modal" data-bs-target="#questionModal" >Задать вопрос</button>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row feedback-block" data-question>#}
+{#            <div class="col-md-2 feedback-head">#}
+{#                <div class="feedback-star">#}
+{#                    <div class="rating-result">#}
+{#                        <span class="active"></span>#}
+{#                        <span class="active"></span>#}
+{#                        <span class="active"></span>#}
+{#                        <span class="active"></span>#}
+{#                        <span></span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <p>Вячеслав</p>#}
+{#                <time datetime="2021-11-18">18 ноября 2021 г.</time>#}
+{#            </div>#}
+{#            <div class="col-md-10 feedback-text">#}
+{#                <p class="question">Такого плохого инструмента у меня не было. Всё лето мучился. Что только не делал,пилки менял,режимы,пытался подошвой как то играть,всё напрасно. В итоге убил об стену. Хорошо старый лобзик макита был. Сейчас и не знаю,что взять</p>#}
+{#                <p class="answer"><span>Администратор:</span> Добрый день! Что вас разочаровал наш товар. Мы передадим ваш отзыв производителю. Спасибо за обратную связь</p>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row feedback-block" data-review>#}
+{#            <div class="col-md-2 feedback-head">#}
+{#                <div class="feedback-star">#}
+{#                    <div class="rating-result">#}
+{#                        <span class="active"></span>#}
+{#                        <span class="active"></span>#}
+{#                        <span class="active"></span>#}
+{#                        <span class="active"></span>#}
+{#                        <span></span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <p>Кирилл Неймов</p>#}
+{#                <time datetime="2021-09-19">19 сентября 2021 г.</time>#}
+{#            </div>#}
+{#            <div class="col-md-10 feedback-text">#}
+{#                <p class="review-text">#}
+{#                    <span>Комментарий:</span> Идеальный вариант для столярных работ в домашних условиях и небольшом объеме.#}
+{#                    В качестве профессионального инструмента, не рассматривал. На мой взгляд, профессиональный инструмент производят другие brand-ы и они находятся в другой ценовой категории.#}
+{#                    Качество сборки достаточно высокое, хотя есть и недостатки#}
+{#                </p>#}
+{#                <p class="review-text">#}
+{#                    <span>Достоинства:</span> Идеальный вариант для столярных работ в домашних условиях и небольшом объеме.#}
+{#                    В качестве профессионального инструмента, не рассматривал. На мой взгляд, профессиональный инструмент производят другие brand-ы и они находятся в другой ценовой категории.#}
+{#                    Качество сборки достаточно высокое, хотя есть и недостатки#}
+{#                </p>#}
+{#                <p class="review-text">#}
+{#                    <span>Недостатки:</span> Идеальный вариант для столярных работ в домашних условиях и небольшом объеме.#}
+{#                    В качестве профессионального инструмента, не рассматривал. На мой взгляд, профессиональный инструмент производят другие brand-ы и они находятся в другой ценовой категории.#}
+{#                    Качество сборки достаточно высокое, хотя есть и недостатки#}
+{#                </p>#}
+{#            </div>#}
+{#        </div>#}
+{#    </article>#}
+</div>
+</div>

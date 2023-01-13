@@ -1,0 +1,47 @@
+<div class="catalog-wripper" data-catalog="wripper">
+    {% if title %}
+    <h1 class="text-center">{{ title }}</h1>
+    {% endif %}
+    <div class="row  gy-4 catalog-container" data-catalog="container">
+        {% for item in items %}
+            <div class="col-auto">
+            <article class="product-card">
+                <div class="card__head">
+                    <p class="card__number">Код {{ item.get_article }}</p>
+{#                    <div class="rating-result">#}
+{#                        <span class="active"></span>#}
+{#                        <span class="active"></span>#}
+{#                        <span class="active"></span>#}
+{#                        <span class="active"></span>#}
+{#                        <span></span>#}
+{#                    </div>#}
+                </div>
+                <div class="card__main">
+                    <h1 class="card__title">
+                        <a href="{{ item.get_link }}">{{ item.get_title }}</a>
+                    </h1>
+                    <div class="card__img-wrapper d-flex justify-content-center">
+                        <img class="card__img" src="{{ item.get_image.url }}" alt="chainsaw">
+                    </div>
+                    <p class="card__text">{{ item.get_short_description }}</p>
+                </div>
+                <div class="card__foot">
+                    <div>
+                        {% if item.get_sale_price %}
+                            <p class="card__old-cost">{{ item.get_regular_price }} {{ item.get_currency }}</p>
+                            <p class="card__current-cost">{{ item.get_sale_price }} {{ item.get_currency }}</p>
+                        {% else %}
+                            <p class="card__current-cost">{{ item.get_regular_price }} {{ item.get_currency }}</p>
+                        {% endif %}
+                    </div>
+                    <div>
+{#                        <p class="card__time">Получить завтра</p>#}
+                        <button class="card__in-cart add_to_cart add_to_basket" data-id="{{ item.get_id }}" type="button">В корзину</button>
+                    </div>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+        {{ pagination_render() }}
+    </div>
+</div>

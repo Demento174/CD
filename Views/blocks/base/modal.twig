@@ -1,0 +1,20 @@
+<div class="modal" tabindex="-1" id="callback">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+
+			<div class="modal-body">
+				<div class="title ">{{ forms.callback.title }}</div>
+				<form class="d-flex flex-column align-items-center _form">
+					<input class="input mb-4" data-name="name" type="text" placeholder="Имя">
+					<input class="input mb-4" data-name="phone" type="tel" placeholder="+7 (999) 999 99-99">
+					<input type="hidden" data-name="type" value="Обратный звонок">
+					<button class="btn-orange send" type="submit">Отправить</button>
+					<div class="response">{{ forms.callback.response }}</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

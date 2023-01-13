@@ -1,0 +1,324 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{#<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>#}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{#<link rel="stylesheet/less" type="text/css" href="./assets/less/style.less" />#}
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.3/less.min.js"></script>#}
+<div class="import_plugin_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="cme_header">
+
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="url"
+                            id="url"
+                            value="https://instrument.ru/yandexmarket/1b78da37-0b26-45a6-a885-095183509075.xml"
+                    >
+
+                    {#                <div class="progress">#}
+                    {#                    <div class="bar shadow circuit" style="width: 0%; transition-duration: 2s;">#}
+
+                    {#                    </div>#}
+                    {#                </div>#}
+
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4">
+                <div class="_column d-flex justify-content-between flex-column align-items-center">
+                    <h2 class="text-center">Категории</h2>
+                    <select class="form-select mb-3"  aria-label="Заголовки" name="title" id="category_title">
+                        <option selected value="update">Заголовки</option>
+                        <option value="update_empty">Обновляем только если значение пустое</option>
+                        <option  value="0">Не обновляем / не выгружаем</option>
+                    </select>
+
+                    <select class="form-select mb-3" aria-label="Иерархия категорий"
+                            name="parent" id="category_parent">
+                        <option selected value="update">Иерархия категорий</option>
+                        <option value="0">Не обновляем / не выгружаем</option>
+                    </select>
+                    <button type="submit"   class="button button-primary update_category">Выгрузка категорий</button>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4">
+                <div class="_column d-flex justify-content-between flex-column align-items-center">
+                    <h2 class="text-center">Товары</h2>
+
+                    <select class="form-select mb-3" aria-label="Заголовки" name="title" id="category_title">
+                        <option selected value="update">Заголовки</option>
+                        <option value="update_empty">Обновляем только если значение пустое</option>
+                        <option  value="0">Не обновляем / не выгружаем</option>
+                    </select>
+
+                    <select class="form-select mb-3"
+                            style="max-width: 300px;" aria-label="Иерархия категорий"
+                            name="parent" id="category_parent">
+                        <option selected value="update">Иерархия категорий</option>
+                        <option value="0">Не обновляем / не выгружаем</option>
+                    </select>
+
+                    <select class="form-select mb-3"
+                            style="max-width: 300px;" aria-label="Артикли"
+                            name="parent" id="category_parent">
+                        <option selected value="0">Оставляем без изменений</option>
+                        <option value="replace_original">Вставляем как оригинальный артикуль</option>
+                    </select>
+
+                    <select class="form-select mb-3"
+                            style="max-width: 300px;" aria-label="Цены"
+                            name="parent" id="category_parent">
+                        <option selected value="update">Обновляем</option>
+                        <option value="update_empty">Обновляем только если значение пустое</option>
+                        <option value="0">Не обновляем / не выгружаем</option>
+                    </select>
+
+                    <select class="form-select mb-3"
+                            style="max-width: 300px;" aria-label="Цены"
+                            name="parent" id="category_parent">
+                        <option selected value="update">Аттрибуты</option>
+                        <option value="0">Не обновляем / не выгружаем</option>
+                    </select>
+
+                    <button type="submit"   class="button button-primary update_products">Выгрузка Товаров</button>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4">
+                <div class="_column d-flex justify-content-between flex-column align-items-center">
+                    <h2 class="text-center">Выгрузка изображений товаров</h2>
+
+                    <select class="form-select mb-3"
+                            style="max-width: 300px;" aria-label="Цены"
+                            name="parent" id="category_parent">
+                        <option selected value="update">Заменяем оригинальные изображения</option>
+                        <option value="0">Выгружаем изображение если оно не установленно</option>
+                    </select>
+
+                    <button type="submit"   class="button button-primary update_products_image">Выгрузка Товаров</button>
+
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="response">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded',
+        ()=>
+        {
+            document.querySelector('button.update_category').addEventListener('click',async (e)=>
+            {
+                const url = document.querySelector('#url').value;
+                const update_title = document.querySelector('#category_title').value;
+                const update_parent = document.querySelector('#category_parent').value;
+                update_category(url,update_title,update_parent);
+            });
+
+            document.querySelector('button.update_products').addEventListener('click',async (e)=>
+            {
+                const url = document.querySelector('#url').value;
+                const update_title = document.querySelector('#category_title').value;
+                const update_parent = document.querySelector('#category_parent').value;
+               update_products(url,update_title,update_parent);
+            });
+
+            document.querySelector('button.update_products_image').addEventListener('click',async (e)=>
+            {
+                const url = document.querySelector('#url').value;
+                const update_title = document.querySelector('#category_title').value;
+                const update_parent = document.querySelector('#category_parent').value;
+                update_products_image(url,update_title,update_parent);
+            });
+        });
+    function update_category(url,update_title,update_parent)
+    {
+        const data = new FormData();
+
+        data.append('action','update_category');
+        data.append('url',url);
+        data.append('category_update_title',update_title);
+        data.append('category_update_parent',update_parent);
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('POST', ajaxurl, true);
+
+        xhr.send(data);
+
+        const responseData = JSON.parse(xhr.responseText);
+
+        let responseContainer = document.querySelector('.response ul');
+        responseData.forEach((item,key)=>
+        {
+            let li = document.createElement('li');
+            li.innerHTML =
+                `${key+1}) Категория ${item['title']}, ID: ${item['id']}, parent article ${item['parent']}; Action: ${item['action']}`;
+            responseContainer.append(li);
+        });
+
+        // let count =100 / responseData.length;
+        // let lots =[];
+        // console.log(responseData);
+
+
+
+        // loadProgressBar(100);
+    }
+
+     function update_products(url,update_title,update_parent)
+    {
+        const data = new FormData();
+
+        data.append('action','update_products');
+        data.append('url',url);
+        data.append('category_update_title',update_title);
+        data.append('category_update_parent',update_parent);
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('POST', ajaxurl, true);
+
+        xhr.send(data);
+
+        xhr.onload = ()=>
+        {
+            const responseData = JSON.parse(xhr.responseText);
+
+            let responseContainer = document.querySelector('.response ul');
+            responseData.forEach((item,key)=>
+            {
+                let li = document.createElement('li');
+                li.innerHTML =
+                    `${key+1}) Товар ${item['title']}, ID: ${item['article']},; Action: ${item['action']}`;
+                responseContainer.append(li);
+            });
+        }
+
+
+
+        // let count =100 / responseData.length;
+        // let lots =[];
+        // console.log(responseData);
+
+
+
+        // loadProgressBar(100);
+    }
+
+    function update_products_image(url,update_title,update_parent)
+    {
+        const data = new FormData();
+
+        data.append('action','update_products_image');
+        data.append('url',url);
+        data.append('category_update_title',update_title);
+        data.append('category_update_parent',update_parent);
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('POST', ajaxurl, true);
+
+        xhr.send(data);
+
+        xhr.onload = ()=>
+        {
+            const responseData = JSON.parse(xhr.responseText);
+
+            let responseContainer = document.querySelector('.response ul');
+            responseData.forEach((item,key)=>
+            {
+                let li = document.createElement('li');
+                li.innerHTML =
+                    `${key+1}) Товар ${item['title']}, ID: ${item['article']},; Action: ${item['action']}`;
+                responseContainer.append(li);
+            });
+        }
+
+
+
+        // let count =100 / responseData.length;
+        // let lots =[];
+        // console.log(responseData);
+
+
+
+        // loadProgressBar(100);
+    }
+
+    async function parse_xml(url)
+    {
+        function reqListener () {
+            console.log(this.responseText);
+        }
+
+        var oReq = new XMLHttpRequest();
+        oReq.onload = reqListener;
+        oReq.open("get", url, true);
+        oReq.send();
+    }
+
+
+    function loadProgressBar(value)
+    {
+
+        const bar = document.querySelector('.bar');
+        const randomTiming = Math.floor((Math.random() * 2) + 2);
+        const width =value!==100?Number(bar.style.width.slice(0,document.querySelector('.bar').style.width.indexOf('%'))) + Number(value):100;
+        if(width >=95 && width !== 100)
+        {
+            return;
+        }
+        bar.style.transitionDuration = `${randomTiming}s`;
+        bar.style.width = `${width}%`;
+        bar.innerText = `${Math.floor(Number(bar.style.width.slice(0,document.querySelector('.bar').style.width.indexOf('%'))) * 100)/100}%`
+    }
+
+
+
+
+    async function getItem(item) {
+
+        let response = jQuery.ajax({
+            method:'post',
+            url: myajax.url,
+            data:{action:'api_cme',item:item},
+            async:true,
+            success:async (response)=>{
+                return  response;
+
+            }
+
+        });
+        return response;
+    }
+
+</script>
+
+<style>
+    .import_plugin_wrapper{
+        padding-top: 100px;
+    }
+    .import_plugin_wrapper .cme_header{
+        margin-bottom: 100px;
+    }
+    .import_plugin_wrapper select{
+        width: 300px;
+    }
+    .import_plugin_wrapper ._column{
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+    }
+</style>
